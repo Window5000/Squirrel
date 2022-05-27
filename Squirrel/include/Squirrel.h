@@ -101,17 +101,14 @@ namespace Squirrel {
 	void checkFiles() {
 		std::fstream config("config.txt");
 		if (!config.is_open()) {
-			std::cout << "[!!!] Failed loading file\n";
 			std::ofstream{ "config.txt" };
 		}
 		std::fstream itemsfile("items.txt");
 		if (!itemsfile.is_open()) {
-			std::cout << "[!!!] Failed loading file\n";
 			std::ofstream{ "items.txt" };
 		}
 		std::fstream settings("settings.txt");
 		if (!settings.is_open()) {
-			std::cout << "[!!!] Failed loading file\n";
 			std::ofstream{ "settings.txt" };
 		}
 	}
