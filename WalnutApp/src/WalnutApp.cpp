@@ -1,6 +1,8 @@
 #include "Walnut/Application.h"
 #include "Walnut/EntryPoint.h"
 
+#include "Squirrel.h"
+
 #include "Walnut/Image.h"
 
 class ExampleLayer : public Walnut::Layer
@@ -14,12 +16,16 @@ public:
 	{
 		Squirrel::Start();
 		
-		if(ImGui::BeginTabItem("Test1")) {
-			Squirrel::BuyButton("Example1", 5, "An example", 10.0f, SquirrelConf::ItemList::Example1, SquirrelConf::Type::Test1);
+		if(ImGui::BeginTabItem("AutoClickers")) {
+			Squirrel::BuyButton("Example1", 5, "An example", 10.0f, SquirrelConf::ItemList::Example1, Squirrel::Type::AutoClicker);
+
+			ImGui::EndTabItem();
 		}
 		
-		if(ImGui::BeginTabItem("Test2")) {
-			Squirrel::BuyButton("Example2", 10, "Another example", 15.0f, SquirrelConf::ItemList::Example2, SquirrelConf::Type::Test2);
+		if(ImGui::BeginTabItem("Multipliers")) {
+			Squirrel::BuyButton("Example2", 10, "Another example", 15.0f, SquirrelConf::ItemList::Example2, Squirrel::Type::Multiplier);
+
+			ImGui::EndTabItem();
 		}
 		
 		Squirrel::End();
@@ -38,7 +44,7 @@ Walnut::Application* Walnut::CreateApplication(int argc, char** argv)
 	Walnut::Application* app = new Walnut::Application(spec);
 	app->PushLayer<ExampleLayer>();
 	
-	Squirrel::MakeMenu();
+	Squirrel::MakeMenu(app);
 	
 	return app;
 }
