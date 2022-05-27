@@ -30,6 +30,11 @@ namespace Squirrel {
 	}
 	//ItemsEnd
 
+	enum Type {
+		AutoClicker,
+		Multiplier
+	};
+
 	void wipeSave() {
 		clicks = 0.0f;
 		clickmtlr = 1.0f;
@@ -48,7 +53,6 @@ namespace Squirrel {
 		config.open("config.txt");
 		if (!config.is_open()) {
 			std::cout << "[!!!] Failed loading file\n";
-			return;
 		}
 		while (getline(config, line))
 		{
@@ -66,7 +70,6 @@ namespace Squirrel {
 		settings.open("settings.txt");
 		if (!settings.is_open()) {
 			std::cout << "[!!!] Failed loading file\n";
-			return;
 		}
 		while (getline(settings, line))
 		{
@@ -82,7 +85,6 @@ namespace Squirrel {
 		itemsc.open("items.txt");
 		if (!itemsc.is_open()) {
 			std::cout << "[!!!] Failed loading file\n";
-			return;
 		}
 		while (getline(itemsc, line))
 		{
@@ -101,7 +103,6 @@ namespace Squirrel {
 		if (!config.is_open()) {
 			std::cout << "[!!!] Failed loading file\n";
 			std::ofstream{ "config.txt" };
-			return;
 		}
 		config << clicks;
 		config << "\n";
@@ -114,7 +115,6 @@ namespace Squirrel {
 		if (!settings.is_open()) {
 			std::cout << "[!!!] Failed loading file\n";
 			std::ofstream{ "settings.txt" };
-			return;
 		}
 		settings << docking;
 		settings << "\n";
@@ -125,7 +125,6 @@ namespace Squirrel {
 		if (!itemsc.is_open()) {
 			std::cout << "[!!!] Failed loading file\n";
 			std::ofstream{ "items.txt" };
-			return;
 		}
 		for (int i = 0; i < items.size(); i++) {
 			if (i != 0) itemsc << "\n";
@@ -134,7 +133,7 @@ namespace Squirrel {
 		itemsc.close();
 	}
 
-	void BuyButton(const char* name, int price, const char* description, float amount, SquirrelConf::ItemList item, SquirrelConf::Type type) {
+	void BuyButton(const char* name, int price, const char* description, float amount, SquirrelConf::ItemList item, Squirrel::Type type) {
 		gprice[item] = price;
 
 		std::ostringstream oss;
@@ -144,15 +143,15 @@ namespace Squirrel {
 		if (ImGui::Button(itmname)) {
 			if (clicks >= gprice[item]) {
 				clicks -= gprice[item];
-				if (type == SquirrelConf::Type::Eater) cps += amount;
-				else if (type == SquirrelConf::Type::Generator) clickmtlr += amount;
+				if (type == Squirrel::Type::AutoClicker) cps += amount;
+				else if (type == Squirrel::Type::Multiplier) clickmtlr += amount;
 				items[item]++;
 			}
 		}
 		if (ImGui::IsItemHovered()) {
 			std::ostringstream oss2;
-			if (type == SquirrelConf::Type::Eater) oss2 << description << " (+" << amount << " CPS)";
-			else if (type == SquirrelConf::Type::Generator) oss2 << description << " (+" << amount << " multiplier)";
+			if (type == Squirrel::Type::AutoClicker) oss2 << description << " (+" << amount << " CPS)";
+			else if (type == Squirrel::Type::Multiplier) oss2 << description << " (+" << amount << " multiplier)";
 			std::string cstr2 = oss2.str();
 			const char* desc = cstr2.c_str();
 			ImGui::SetTooltip(desc);
