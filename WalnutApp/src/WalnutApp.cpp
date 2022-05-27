@@ -36,7 +36,7 @@ public:
 Walnut::Application* Walnut::CreateApplication(int argc, char** argv)
 {
 	Squirrel::addItems();
-	Squirrel::CheckFiles();
+	Squirrel::checkFiles();
 	Squirrel::loadFile();
 	
 	Walnut::ApplicationSpecification spec;
