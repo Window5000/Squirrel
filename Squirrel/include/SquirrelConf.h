@@ -2,8 +2,8 @@
 
 namespace SquirrelConf {
 	enum ItemList {
-		Example = 0, // For testing
-		Exampl2 = 1,
+		Example1 = 0, // For testing
+		Example2 = 1,
 
 		MAX = 2 // Set this to amount of items in this enum (Does not include MAX)
 	};
