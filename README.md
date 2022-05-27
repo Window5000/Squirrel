@@ -11,7 +11,7 @@ Currently supports Windows - with macOS and Linux support planned. Setup scripts
 ## Getting Started
 Once you've cloned, run `scripts/Setup.bat` to generate Visual Studio 2022 solution/project files. Once you've opened the solution, you can run the WalnutApp project to see a basic example (code in `WalnutApp.cpp`). I recommend modifying that WalnutApp project to create your own application, as everything should be setup and ready to go.
 
-####(Wiki is comming)
+#### (Wiki is comming)
 
 ### 3rd party libaries
 - [Dear ImGui](https://github.com/ocornut/imgui)
