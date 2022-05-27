@@ -2,13 +2,14 @@
 
 namespace SquirrelConf {
 	enum ItemList {
-		Test = 0, // For testing
+		Example = 0, // For testing
+		Exampl2 = 1,
 
-		MAX = 1 // Set this to amount of items in this enum (Does not include MAX)
+		MAX = 2 // Set this to amount of items in this enum (Does not include MAX)
 	};
 
 	enum Type {
-		Eater,
-		Generator
+		Test1,
+		Test2
 	};
 }
