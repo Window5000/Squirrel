@@ -7,9 +7,4 @@ namespace SquirrelConf {
 
 		MAX = 2 // Set this to amount of items in this enum (Does not include MAX)
 	};
-
-	enum Type {
-		Test1,
-		Test2
-	};
 }
