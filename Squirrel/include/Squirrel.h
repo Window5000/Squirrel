@@ -18,22 +18,17 @@ namespace Squirrel {
 	//PriceBegin
 	std::vector<unsigned int> gprice;
 	void addPrices() {
-		for (int i = 0; i < SquirrelConf::ItemList::MAX; i++) gprice.push_back(0);
+		for (int i = 0; i < SquirrelConf::ItemList::Last; i++) gprice.push_back(0);
 	}
 	//PriceEnd
 
 	//ItemsBegin
 	std::vector<unsigned int> items;
 	void addItems() {
-		for (int i = 0; i < SquirrelConf::ItemList::MAX; i++) items.push_back(0);
+		for (int i = 0; i < SquirrelConf::ItemList::Last; i++) items.push_back(0);
 		addPrices();
 	}
 	//ItemsEnd
-
-	enum Type {
-		AutoClicker,
-		Multiplier
-	};
 
 	void wipeSave() {
 		clicks = 0.0f;
@@ -148,7 +143,7 @@ namespace Squirrel {
 		itemsc.close();
 	}
 
-	void BuyButton(const char* name, int price, const char* description, float amount, SquirrelConf::ItemList item, Squirrel::Type type) {
+	void BuyButton(const char* name, int price, const char* description, float amount, SquirrelConf::ItemList item, SquirrelConf::Type type) {
 		gprice[item] = price;
 
 		std::ostringstream oss;
@@ -158,15 +153,13 @@ namespace Squirrel {
 		if (ImGui::Button(itmname)) {
 			if (clicks >= gprice[item]) {
 				clicks -= gprice[item];
-				if (type == Squirrel::Type::AutoClicker) cps += amount;
-				else if (type == Squirrel::Type::Multiplier) clickmtlr += amount;
+				SquirrelConf::doType(type, amount, &cps, &clickmtlr, &clicks);
 				items[item]++;
 			}
 		}
 		if (ImGui::IsItemHovered()) {
 			std::ostringstream oss2;
-			if (type == Squirrel::Type::AutoClicker) oss2 << description << " (+" << amount << " CPS)";
-			else if (type == Squirrel::Type::Multiplier) oss2 << description << " (+" << amount << " multiplier)";
+			oss2 = SquirrelConf::doTypeDescription(type, amount, description);
 			std::string cstr2 = oss2.str();
 			const char* desc = cstr2.c_str();
 			ImGui::SetTooltip(desc);
