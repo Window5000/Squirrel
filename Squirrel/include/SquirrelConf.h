@@ -12,9 +12,9 @@ namespace SquirrelConf {
 
 	enum Type {
 		AutoClicker,
-		Multiplier,
+		Multiplier/*,
 
-		Last // Do NOT remove this line
+		LastType // Do NOT remove this line*/
 	};
 
 	void doType(SquirrelConf::Type type, float amount, float* cps, float* clickmtr, float* clicks) {
