@@ -5,13 +5,12 @@ project "WalnutApp"
    targetdir "bin/%{cfg.buildcfg}"
    staticruntime "off"
 
-   files { "src/**.h", "src/**.cpp" }
+   files { "src/**.h", "src/**.cpp", "../Squirrel/include/**.h"}
 
    includedirs
    {
       "../vendor/imgui",
       "../vendor/glfw/include",
-      "../Squirrel/include",
 
       "../Walnut/src",
 
