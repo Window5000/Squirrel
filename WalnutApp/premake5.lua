@@ -5,7 +5,9 @@ project "WalnutApp"
    targetdir "bin/%{cfg.buildcfg}"
    staticruntime "off"
 
-   files { "src/**.h", "src/**.cpp", "../Squirrel/**.h"}
+   os.execute("{COPY} ../Squirrel/include/**.h src")
+
+   files { "src/**.h", "src/**.cpp"}
 
    includedirs
    {
