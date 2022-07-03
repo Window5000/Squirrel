@@ -1,7 +1,7 @@
 #include "Walnut/Application.h"
 #include "Walnut/EntryPoint.h"
 
-#include "Squirrel.h"
+#include "../../Squirrel/include/Squirrel.h"
 
 #include "Walnut/Image.h"
 
