@@ -11,3 +11,6 @@ bin-int/
 
 # Exclude
 !vendor/bin
+
+WalnutApp/src/Squirrel.h
+WalnutApp/src/SquirrelConf.h
