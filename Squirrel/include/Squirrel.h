@@ -143,29 +143,31 @@ namespace Squirrel {
 		itemsc.close();
 	}
 
-	void BuyButton(const char* name, int price, const char* description, float amount, SquirrelConf::ItemList item, SquirrelConf::Type type) {
-		gprice[item] = price;
+	namespace Buttons {
+		void BuyButton(const char* name, int price, const char* description, float amount, SquirrelConf::ItemList item, SquirrelConf::Type type) {
+			gprice[item] = price;
 
-		std::ostringstream oss;
-		oss << "($" << std::to_string(gprice[item]) << ") " << name;
-		std::string cstr = oss.str();
-		const char* itmname = cstr.c_str();
-		if (ImGui::Button(itmname)) {
-			if (clicks >= gprice[item]) {
-				clicks -= gprice[item];
-				SquirrelConf::doType(type, amount, &cps, &clickmtlr, &clicks);
-				items[item]++;
+			std::ostringstream oss;
+			oss << "($" << std::to_string(gprice[item]) << ") " << name;
+			std::string cstr = oss.str();
+			const char* itmname = cstr.c_str();
+			if (ImGui::Button(itmname)) {
+				if (clicks >= gprice[item]) {
+					clicks -= gprice[item];
+					SquirrelConf::doType(type, amount, &cps, &clickmtlr, &clicks);
+					items[item]++;
+				}
 			}
+			if (ImGui::IsItemHovered()) {
+				std::ostringstream oss2;
+				oss2 = SquirrelConf::doTypeDescription(type, amount, description);
+				std::string cstr2 = oss2.str();
+				const char* desc = cstr2.c_str();
+				ImGui::SetTooltip(desc);
+			}
+			ImGui::SameLine();
+			ImGui::Text("%u", items[item]);
 		}
-		if (ImGui::IsItemHovered()) {
-			std::ostringstream oss2;
-			oss2 = SquirrelConf::doTypeDescription(type, amount, description);
-			std::string cstr2 = oss2.str();
-			const char* desc = cstr2.c_str();
-			ImGui::SetTooltip(desc);
-		}
-		ImGui::SameLine();
-		ImGui::Text("%u", items[item]);
 	}
 
 	void MakeMenu(Walnut::Application* app) {

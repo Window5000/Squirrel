@@ -1,7 +1,7 @@
 #include "Walnut/Application.h"
 #include "Walnut/EntryPoint.h"
 
-#include "Squirrel.h"
+#include "../../Squirrel/include/Squirrel.h"
 
 #include "Walnut/Image.h"
 
@@ -17,13 +17,13 @@ public:
 		Squirrel::Start();
 		
 		if(ImGui::BeginTabItem("AutoClickers")) {
-			Squirrel::BuyButton("Example1", 5, "An example", 10.0f, SquirrelConf::ItemList::Example1, SquirrelConf::Type::AutoClicker);
+			Squirrel::Buttons::BuyButton("Example1", 5, "An example", 10.0f, SquirrelConf::ItemList::Example1, SquirrelConf::Type::AutoClicker);
 
 			ImGui::EndTabItem();
 		}
 		
 		if(ImGui::BeginTabItem("Multipliers")) {
-			Squirrel::BuyButton("Example2", 10, "Another example", 15.0f, SquirrelConf::ItemList::Example2, SquirrelConf::Type::Multiplier);
+			Squirrel::Buttons::BuyButton("Example2", 10, "Another example", 15.0f, SquirrelConf::ItemList::Example2, SquirrelConf::Type::Multiplier);
 
 			ImGui::EndTabItem();
 		}
